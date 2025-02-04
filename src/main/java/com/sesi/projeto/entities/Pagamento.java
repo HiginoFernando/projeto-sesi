@@ -1,7 +1,15 @@
 package com.sesi.projeto.entities;
 
-import jakarta.persistence.*;
 import java.time.Instant;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "pagamento")
@@ -14,6 +22,7 @@ public class Pagamento {
     private Instant momento;
 
     @OneToOne
+    @MapsId
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 

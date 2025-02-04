@@ -1,6 +1,7 @@
 package com.sesi.projeto.entities;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -12,20 +13,11 @@ public class Usuario {
 
     private String nome;
     private String email;
-    private String telefone;
-    private String senha;
-    private String roles;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pedido> pedidos;
 
     public Usuario() {}
-
-    public Usuario(Long id, String nome, String email, String telefone, String senha, String roles) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.senha = senha;
-        this.roles = roles;
-    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -36,12 +28,6 @@ public class Usuario {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getTelefone() { return telefone; }
-    public void setTelefone(String telefone) { this.telefone = telefone; }
-
-    public String getSenha() { return senha; }
-    public void setSenha(String senha) { this.senha = senha; }
-
-    public String getRoles() { return roles; }
-    public void setRoles(String roles) { this.roles = roles; }
+    public List<Pedido> getPedidos() { return pedidos; }
+    public void setPedidos(List<Pedido> pedidos) { this.pedidos = pedidos; }
 }

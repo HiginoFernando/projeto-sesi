@@ -1,8 +1,6 @@
 package com.sesi.projeto.entities;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "item_do_pedido")
@@ -31,4 +29,17 @@ public class ItemDoPedido {
 
     public double getPreco() { return preco; }
     public void setPreco(double preco) { this.preco = preco; }
+
+    @ManyToOne
+    @MapsId("pedido")
+    @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
+    private Pedido pedido;
+
+    @ManyToOne
+    @MapsId("produto")
+    @JoinColumn(name = "produto_id", insertable = false, updatable = false)
+    private Produto produto;
+
+    public Pedido getPedido() { return pedido; }
+    public Produto getProduto() { return produto; }
 }
